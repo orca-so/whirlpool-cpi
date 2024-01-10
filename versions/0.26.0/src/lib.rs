@@ -11,7 +11,7 @@ pub mod context;
 use crate::context::*;
 
 #[program]
-pub mod with_anchor_0_26_0 {
+pub mod whirlpool_cpi {
     use super::*;
 
     pub fn initialize_config(
