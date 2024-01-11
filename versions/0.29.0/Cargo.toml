@@ -23,3 +23,8 @@ anchor-lang = "=0.29.0"
 anchor-spl = "=0.29.0"
 
 solana-program = ">= 1.16, < 1.18"
+
+# unpack TickArray
+bincode = "*"
+borsh = "*"
+default-boxed = "0.2.0"

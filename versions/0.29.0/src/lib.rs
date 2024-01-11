@@ -9,8 +9,10 @@ pub mod state;
 pub mod context;
 use crate::context::*;
 
+pub mod util;
+
 #[program]
-pub mod whirlpool_cpi {
+pub mod whirlpool {
     use super::*;
 
     pub fn initialize_config(

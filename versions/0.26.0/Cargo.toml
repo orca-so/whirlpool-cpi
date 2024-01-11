@@ -28,3 +28,8 @@ solana-program = ">= 1.13.5, < 1.15"
 regex = "=1.7.1"
 proc-macro-crate = "=1.2.1"
 jobserver = "=0.1.25"
+
+# unpack TickArray
+bincode = "*"
+borsh = "*"
+default-boxed = "0.2.0"
