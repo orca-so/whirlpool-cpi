@@ -3,9 +3,9 @@ use anchor_lang::prelude::*;
 ////////////////////////////////////////////////////////////////////////////////
 // Constant
 ////////////////////////////////////////////////////////////////////////////////
-const NUM_REWARDS: usize = 3;
-const TICK_ARRAY_SIZE_USIZE: usize = 88;
-const POSITION_BITMAP_USIZE: usize = 32;
+pub(crate) const NUM_REWARDS: usize = 3;
+pub(crate) const TICK_ARRAY_SIZE_USIZE: usize = 88;
+pub(crate) const POSITION_BITMAP_USIZE: usize = 32;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Account
@@ -61,6 +61,7 @@ impl Whirlpool {
 }
 
 #[account(zero_copy)]
+#[repr(packed)]
 pub struct TickArray {
   pub start_tick_index: i32,
   pub ticks: [Tick; TICK_ARRAY_SIZE_USIZE],
@@ -113,6 +114,7 @@ pub struct WhirlpoolRewardInfo {
 }
 
 #[zero_copy]
+#[repr(packed)]
 #[derive(Default, Debug, PartialEq)]
 pub struct Tick {
   pub initialized: bool,
