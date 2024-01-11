@@ -10,6 +10,8 @@ use crate::state::*;
 pub mod context;
 use crate::context::*;
 
+pub mod util;
+
 #[program]
 pub mod whirlpool {
     use super::*;
