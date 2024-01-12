@@ -11,7 +11,7 @@ pub struct UnpackedTickArray {
   pub whirlpool: Pubkey,
 }
 
-#[derive(BorshDeserialize, Debug, PartialEq, Default, Clone, Copy)]
+#[derive(borsh::BorshDeserialize, Debug, PartialEq, Default, Clone, Copy)]
 pub struct UnpackedTick {
     pub initialized: bool,
     pub liquidity_net: i128,
