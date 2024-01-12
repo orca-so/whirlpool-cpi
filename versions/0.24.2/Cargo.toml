@@ -36,6 +36,5 @@ log = "=0.4.17"
 
 # unpack TickArray
 bincode = "1.3.3"
-borsh = "0.9"
 default-boxed = "0.2.0"
 
