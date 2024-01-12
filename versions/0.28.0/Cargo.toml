@@ -19,10 +19,10 @@ no-log-ix-name = []
 cpi = ["no-entrypoint"]
 
 [dependencies]
-anchor-lang = "=0.29.0"
-anchor-spl = "=0.29.0"
+anchor-lang = "=0.28.0"
+anchor-spl = "=0.28.0"
 
-solana-program = ">=1.16, <1.18"
+solana-program = ">=1.14, <1.17"
 
 # unpack TickArray
 bincode = "1"
