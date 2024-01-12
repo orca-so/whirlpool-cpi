@@ -1,6 +1,6 @@
 use anchor_lang::prelude::*;
 use bincode;
-use borsh;
+use borsh::BorshDeserialize;
 use default_boxed::DefaultBoxed;
 
 use crate::state::{TickArray, Tick, TICK_ARRAY_SIZE_USIZE, NUM_REWARDS};
@@ -12,7 +12,7 @@ pub struct UnpackedTickArray {
   pub whirlpool: Pubkey,
 }
 
-#[derive(borsh::BorshDeserialize, Debug, PartialEq, Default, Clone, Copy)]
+#[derive(BorshDeserialize, Debug, PartialEq, Default, Clone, Copy)]
 pub struct UnpackedTick {
     pub initialized: bool,
     pub liquidity_net: i128,
