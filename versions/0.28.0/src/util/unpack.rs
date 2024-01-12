@@ -1,5 +1,6 @@
 use anchor_lang::prelude::*;
 use bincode;
+use borsh;
 use default_boxed::DefaultBoxed;
 
 use crate::state::{TickArray, Tick, TICK_ARRAY_SIZE_USIZE, NUM_REWARDS};
