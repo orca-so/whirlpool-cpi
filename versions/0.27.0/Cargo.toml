@@ -34,5 +34,4 @@ jobserver = "=0.1.25"
 
 # unpack TickArray
 bincode = "1"
-borsh = "0.9"
 default-boxed = "0.2.0"
