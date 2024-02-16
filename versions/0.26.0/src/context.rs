@@ -699,8 +699,9 @@ pub struct Swap<'info> {
     #[account(mut, has_one = whirlpool)]
     pub tick_array_2: AccountLoader<'info, TickArray>,
 
-    #[account(seeds = [b"oracle", whirlpool.key().as_ref()],bump)]
+    #[account(mut, seeds = [b"oracle", whirlpool.key().as_ref()], bump)]
     /// CHECK: Oracle is currently unused and will be enabled on subsequent updates
+    ///        while not mut in main impl, marked mut here to avoid a breaking change upon upgrade
     pub oracle: UncheckedAccount<'info>,
 }
 
@@ -755,12 +756,14 @@ pub struct TwoHopSwap<'info> {
     #[account(mut, constraint = tick_array_two_2.load()?.whirlpool == whirlpool_two.key())]
     pub tick_array_two_2: AccountLoader<'info, TickArray>,
 
-    #[account(seeds = [b"oracle", whirlpool_one.key().as_ref()],bump)]
+    #[account(mut, seeds = [b"oracle", whirlpool_one.key().as_ref()], bump)]
     /// CHECK: Oracle is currently unused and will be enabled on subsequent updates
+    ///        while not mut in main impl, marked mut here to avoid a breaking change upon upgrade
     pub oracle_one: UncheckedAccount<'info>,
 
-    #[account(seeds = [b"oracle", whirlpool_two.key().as_ref()],bump)]
+    #[account(mut, seeds = [b"oracle", whirlpool_two.key().as_ref()], bump)]
     /// CHECK: Oracle is currently unused and will be enabled on subsequent updates
+    ///        while not mut in main impl, marked mut here to avoid a breaking change upon upgrade
     pub oracle_two: UncheckedAccount<'info>,
 }
 
