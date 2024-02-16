@@ -26,5 +26,4 @@ solana-program = ">=1.16, <1.18"
 
 # unpack TickArray
 bincode = "1"
-borsh = "0.9"
 default-boxed = "0.2.0"
