@@ -914,14 +914,14 @@ pub struct TwoHopSwapV2<'info> {
 
     #[account(mut)]
     pub token_owner_account_input: Account<'info, AccountPlaceholder>,
-    #[account(mut))]
+    #[account(mut)]
     pub token_vault_one_input: Account<'info, AccountPlaceholder>,
-    #[account(mut))]
+    #[account(mut)]
     pub token_vault_one_intermediate: Account<'info, AccountPlaceholder>,
 
     #[account(mut)]
     pub token_vault_two_intermediate: Account<'info, AccountPlaceholder>,
-    #[account(mut))]
+    #[account(mut)]
     pub token_vault_two_output: Account<'info, AccountPlaceholder>,
     #[account(mut)]
     pub token_owner_account_output: Account<'info, AccountPlaceholder>,

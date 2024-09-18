@@ -201,18 +201,18 @@ pub mod whirlpool {
     ////////////////////////////////////////////////////////////////////////////////
     pub fn collect_fees_v2<'info>(
         ctx: Context<'_, '_, '_, 'info, CollectFeesV2<'info>>,
-        remaining_accounts_info: Option<RemainingAccountsInfo>,
+        remaining_accounts_info: Option<state::RemainingAccountsInfo>,
     ) -> Result<()> { Ok(()) }
 
     pub fn collect_protocol_fees_v2<'info>(
         ctx: Context<'_, '_, '_, 'info, CollectProtocolFeesV2<'info>>,
-        remaining_accounts_info: Option<RemainingAccountsInfo>,
+        remaining_accounts_info: Option<state::RemainingAccountsInfo>,
     ) -> Result<()> { Ok(()) }
 
     pub fn collect_reward_v2<'info>(
         ctx: Context<'_, '_, '_, 'info, CollectRewardV2<'info>>,
         reward_index: u8,
-        remaining_accounts_info: Option<RemainingAccountsInfo>,
+        remaining_accounts_info: Option<state::RemainingAccountsInfo>,
     ) -> Result<()> { Ok(()) }
 
     pub fn decrease_liquidity_v2<'info>(
@@ -220,7 +220,7 @@ pub mod whirlpool {
         liquidity_amount: u128,
         token_min_a: u64,
         token_min_b: u64,
-        remaining_accounts_info: Option<RemainingAccountsInfo>,
+        remaining_accounts_info: Option<state::RemainingAccountsInfo>,
     ) -> Result<()> { Ok(()) }
 
     pub fn increase_liquidity_v2<'info>(
@@ -228,7 +228,7 @@ pub mod whirlpool {
         liquidity_amount: u128,
         token_max_a: u64,
         token_max_b: u64,
-        remaining_accounts_info: Option<RemainingAccountsInfo>,
+        remaining_accounts_info: Option<state::RemainingAccountsInfo>,
     ) -> Result<()> { Ok(()) }
 
     pub fn initialize_pool_v2(
@@ -255,7 +255,7 @@ pub mod whirlpool {
         sqrt_price_limit: u128,
         amount_specified_is_input: bool,
         a_to_b: bool,
-        remaining_accounts_info: Option<RemainingAccountsInfo>,
+        remaining_accounts_info: Option<state::RemainingAccountsInfo>,
     ) -> Result<()> { Ok(()) }
 
     #[allow(clippy::too_many_arguments)]
@@ -268,7 +268,7 @@ pub mod whirlpool {
         a_to_b_two: bool,
         sqrt_price_limit_one: u128,
         sqrt_price_limit_two: u128,
-        remaining_accounts_info: Option<RemainingAccountsInfo>,
+        remaining_accounts_info: Option<state::RemainingAccountsInfo>,
     ) -> Result<()> { Ok(()) }
 
     pub fn initialize_config_extension(
