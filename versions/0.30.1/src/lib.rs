@@ -5,13 +5,21 @@ use anchor_lang::prelude::*;
 declare_id!("whirLbMiicVdio4qvUfM5KAg6Ct8VwpYzGff3uctyCc");
 
 pub mod state;
-use crate::state::*;
 
 pub mod context;
 use crate::context::*;
 
 pub mod util;
 
+////////////////////////////////////////////////////////////////////////////////
+// Constant
+////////////////////////////////////////////////////////////////////////////////
+pub const WPB_NFT_UPDATE_AUTH: Pubkey = pubkey!("3axbTs2z5GBy6usVbNVoqEgZMng3vZvMnAoX29BFfwhr");
+pub const WP_NFT_UPDATE_AUTH: Pubkey = pubkey!("3axbTs2z5GBy6usVbNVoqEgZMng3vZvMnAoX29BFfwhr");
+
+////////////////////////////////////////////////////////////////////////////////
+// Program
+////////////////////////////////////////////////////////////////////////////////
 #[program]
 pub mod whirlpool {
     use super::*;
@@ -26,7 +34,7 @@ pub mod whirlpool {
 
     pub fn initialize_pool(
         ctx: Context<InitializePool>,
-        bumps: WhirlpoolBumps,
+        bumps: state::WhirlpoolBumps,
         tick_spacing: u16,
         initial_sqrt_price: u128,
     ) -> Result<()> { Ok(()) }
@@ -55,14 +63,14 @@ pub mod whirlpool {
 
     pub fn open_position(
         ctx: Context<OpenPosition>,
-        bumps: OpenPositionBumps,
+        bumps: state::OpenPositionBumps,
         tick_lower_index: i32,
         tick_upper_index: i32,
     ) -> Result<()> { Ok(()) }
 
     pub fn open_position_with_metadata(
         ctx: Context<OpenPositionWithMetadata>,
-        bumps: OpenPositionWithMetadataBumps,
+        bumps: state::OpenPositionWithMetadataBumps,
         tick_lower_index: i32,
         tick_upper_index: i32,
     ) -> Result<()> { Ok(()) }
@@ -193,18 +201,18 @@ pub mod whirlpool {
     ////////////////////////////////////////////////////////////////////////////////
     pub fn collect_fees_v2<'info>(
         ctx: Context<'_, '_, '_, 'info, CollectFeesV2<'info>>,
-        remaining_accounts_info: Option<RemainingAccountsInfo>,
+        remaining_accounts_info: Option<state::RemainingAccountsInfo>,
     ) -> Result<()> { Ok(()) }
 
     pub fn collect_protocol_fees_v2<'info>(
         ctx: Context<'_, '_, '_, 'info, CollectProtocolFeesV2<'info>>,
-        remaining_accounts_info: Option<RemainingAccountsInfo>,
+        remaining_accounts_info: Option<state::RemainingAccountsInfo>,
     ) -> Result<()> { Ok(()) }
 
     pub fn collect_reward_v2<'info>(
         ctx: Context<'_, '_, '_, 'info, CollectRewardV2<'info>>,
         reward_index: u8,
-        remaining_accounts_info: Option<RemainingAccountsInfo>,
+        remaining_accounts_info: Option<state::RemainingAccountsInfo>,
     ) -> Result<()> { Ok(()) }
 
     pub fn decrease_liquidity_v2<'info>(
@@ -212,7 +220,7 @@ pub mod whirlpool {
         liquidity_amount: u128,
         token_min_a: u64,
         token_min_b: u64,
-        remaining_accounts_info: Option<RemainingAccountsInfo>,
+        remaining_accounts_info: Option<state::RemainingAccountsInfo>,
     ) -> Result<()> { Ok(()) }
 
     pub fn increase_liquidity_v2<'info>(
@@ -220,7 +228,7 @@ pub mod whirlpool {
         liquidity_amount: u128,
         token_max_a: u64,
         token_max_b: u64,
-        remaining_accounts_info: Option<RemainingAccountsInfo>,
+        remaining_accounts_info: Option<state::RemainingAccountsInfo>,
     ) -> Result<()> { Ok(()) }
 
     pub fn initialize_pool_v2(
@@ -247,7 +255,7 @@ pub mod whirlpool {
         sqrt_price_limit: u128,
         amount_specified_is_input: bool,
         a_to_b: bool,
-        remaining_accounts_info: Option<RemainingAccountsInfo>,
+        remaining_accounts_info: Option<state::RemainingAccountsInfo>,
     ) -> Result<()> { Ok(()) }
 
     #[allow(clippy::too_many_arguments)]
@@ -260,7 +268,7 @@ pub mod whirlpool {
         a_to_b_two: bool,
         sqrt_price_limit_one: u128,
         sqrt_price_limit_two: u128,
-        remaining_accounts_info: Option<RemainingAccountsInfo>,
+        remaining_accounts_info: Option<state::RemainingAccountsInfo>,
     ) -> Result<()> { Ok(()) }
 
     pub fn initialize_config_extension(
