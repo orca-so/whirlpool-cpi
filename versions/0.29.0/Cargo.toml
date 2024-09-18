@@ -24,6 +24,10 @@ anchor-spl = "=0.29.0"
 
 solana-program = ">=1.16, <1.18"
 
+# avoid solana-program v2
+spl-token = "=4.0.0"
+spl-memo = "=4.0.0"
+
 # unpack TickArray
 bincode = "1"
 default-boxed = "0.2.0"
