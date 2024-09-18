@@ -1,6 +1,6 @@
 [package]
 name = "whirlpool-cpi"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Developer Advocate from Orca"]
 description = "CPI Adapter for Orca Whirlpool"
 edition = "2021"
