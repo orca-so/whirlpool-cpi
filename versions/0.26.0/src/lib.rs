@@ -188,4 +188,99 @@ pub mod whirlpool {
         bundle_index: u16,
     ) -> Result<()> { Ok(()) }
 
+    ////////////////////////////////////////////////////////////////////////////////
+    // V2 instructions (TokenExtensions)
+    ////////////////////////////////////////////////////////////////////////////////
+    pub fn collect_fees_v2<'info>(
+        ctx: Context<'_, '_, '_, 'info, CollectFeesV2<'info>>,
+        remaining_accounts_info: Option<RemainingAccountsInfo>,
+    ) -> Result<()> { Ok(()) }
+
+    pub fn collect_protocol_fees_v2<'info>(
+        ctx: Context<'_, '_, '_, 'info, CollectProtocolFeesV2<'info>>,
+        remaining_accounts_info: Option<RemainingAccountsInfo>,
+    ) -> Result<()> { Ok(()) }
+
+    pub fn collect_reward_v2<'info>(
+        ctx: Context<'_, '_, '_, 'info, CollectRewardV2<'info>>,
+        reward_index: u8,
+        remaining_accounts_info: Option<RemainingAccountsInfo>,
+    ) -> Result<()> { Ok(()) }
+
+    pub fn decrease_liquidity_v2<'info>(
+        ctx: Context<'_, '_, '_, 'info, ModifyLiquidityV2<'info>>,
+        liquidity_amount: u128,
+        token_min_a: u64,
+        token_min_b: u64,
+        remaining_accounts_info: Option<RemainingAccountsInfo>,
+    ) -> Result<()> { Ok(()) }
+
+    pub fn increase_liquidity_v2<'info>(
+        ctx: Context<'_, '_, '_, 'info, ModifyLiquidityV2<'info>>,
+        liquidity_amount: u128,
+        token_max_a: u64,
+        token_max_b: u64,
+        remaining_accounts_info: Option<RemainingAccountsInfo>,
+    ) -> Result<()> { Ok(()) }
+
+    pub fn initialize_pool_v2(
+        ctx: Context<InitializePoolV2>,
+        tick_spacing: u16,
+        initial_sqrt_price: u128,
+    ) -> Result<()> { Ok(()) }
+
+    pub fn initialize_reward_v2(
+        ctx: Context<InitializeRewardV2>,
+        reward_index: u8
+    ) -> Result<()> { Ok(()) }
+
+    pub fn set_reward_emissions_v2(
+        ctx: Context<SetRewardEmissionsV2>,
+        reward_index: u8,
+        emissions_per_second_x64: u128,
+    ) -> Result<()> { Ok(()) }
+
+    pub fn swap_v2<'info>(
+        ctx: Context<'_, '_, '_, 'info, SwapV2<'info>>,
+        amount: u64,
+        other_amount_threshold: u64,
+        sqrt_price_limit: u128,
+        amount_specified_is_input: bool,
+        a_to_b: bool,
+        remaining_accounts_info: Option<RemainingAccountsInfo>,
+    ) -> Result<()> { Ok(()) }
+
+    #[allow(clippy::too_many_arguments)]
+    pub fn two_hop_swap_v2<'info>(
+        ctx: Context<'_, '_, '_, 'info, TwoHopSwapV2<'info>>,
+        amount: u64,
+        other_amount_threshold: u64,
+        amount_specified_is_input: bool,
+        a_to_b_one: bool,
+        a_to_b_two: bool,
+        sqrt_price_limit_one: u128,
+        sqrt_price_limit_two: u128,
+        remaining_accounts_info: Option<RemainingAccountsInfo>,
+    ) -> Result<()> { Ok(()) }
+
+    pub fn initialize_config_extension(
+        ctx: Context<InitializeConfigExtension>
+    ) -> Result<()> { Ok(()) }
+
+    pub fn set_config_extension_authority(
+        ctx: Context<SetConfigExtensionAuthority>
+    ) -> Result<()> { Ok(()) }
+
+    pub fn set_token_badge_authority(
+        ctx: Context<SetTokenBadgeAuthority>
+    ) -> Result<()> { Ok(()) }
+
+    pub fn initialize_token_badge(
+        ctx: Context<InitializeTokenBadge>
+    ) -> Result<()> { Ok(()) }
+
+    pub fn delete_token_badge(
+        ctx: Context<DeleteTokenBadge>
+    ) -> Result<()> { Ok(()) }
+
 }

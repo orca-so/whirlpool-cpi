@@ -61,7 +61,7 @@ impl Whirlpool {
 }
 
 #[account(zero_copy(unsafe))]
-#[repr(packed)]
+#[repr(C, packed)]
 pub struct TickArray {
   pub start_tick_index: i32,
   pub ticks: [Tick; TICK_ARRAY_SIZE_USIZE],
@@ -101,6 +101,28 @@ impl PositionBundle {
   pub const LEN: usize = 8 + 32 + 32 + 64;
 }
 
+#[account]
+pub struct WhirlpoolsConfigExtension {
+    pub whirlpools_config: Pubkey,
+    pub config_extension_authority: Pubkey,
+    pub token_badge_authority: Pubkey,
+}
+
+impl WhirlpoolsConfigExtension {
+    pub const LEN: usize = 8 + 32 + 32 + 32 + 512;
+}
+
+#[account]
+#[derive(Default)]
+pub struct TokenBadge {
+    pub whirlpools_config: Pubkey,
+    pub token_mint: Pubkey,
+}
+
+impl TokenBadge {
+    pub const LEN: usize = 8 + 32 + 32 + 128;
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // Inner Struct
 ////////////////////////////////////////////////////////////////////////////////
@@ -114,7 +136,7 @@ pub struct WhirlpoolRewardInfo {
 }
 
 #[zero_copy(unsafe)]
-#[repr(packed)]
+#[repr(C, packed)]
 #[derive(Default, Debug, PartialEq)]
 pub struct Tick {
   pub initialized: bool,
@@ -152,4 +174,31 @@ pub struct OpenPositionBumps {
 pub struct OpenPositionWithMetadataBumps {
   pub position_bump: u8,
   pub metadata_bump: u8,
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Remaining Accounts
+////////////////////////////////////////////////////////////////////////////////
+#[derive(AnchorSerialize, AnchorDeserialize, Clone, PartialEq, Eq)]
+pub enum AccountsType {
+    TransferHookA,
+    TransferHookB,
+    TransferHookReward,
+    TransferHookInput,
+    TransferHookIntermediate,
+    TransferHookOutput,
+    SupplementalTickArrays,
+    SupplementalTickArraysOne,
+    SupplementalTickArraysTwo,
+}
+
+#[derive(AnchorSerialize, AnchorDeserialize, Clone)]
+pub struct RemainingAccountsSlice {
+    pub accounts_type: AccountsType,
+    pub length: u8,
+}
+
+#[derive(AnchorSerialize, AnchorDeserialize, Clone)]
+pub struct RemainingAccountsInfo {
+    pub slices: Vec<RemainingAccountsSlice>,
 }

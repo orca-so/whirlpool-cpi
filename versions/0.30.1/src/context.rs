@@ -580,3 +580,383 @@ pub struct UpdateFeesAndRewards<'info> {
     pub tick_array_lower: Account<'info, AccountPlaceholder>,
     pub tick_array_upper: Account<'info, AccountPlaceholder>,
 }
+////////////////////////////////////////////////////////////////////////////////
+// V2 Context
+////////////////////////////////////////////////////////////////////////////////
+#[derive(Accounts)]
+pub struct CollectFeesV2<'info> {
+    pub whirlpool: Account<'info, AccountPlaceholder>,
+
+    pub position_authority: Signer<'info>,
+
+    #[account(mut)]
+    pub position: Account<'info, AccountPlaceholder>,
+    pub position_token_account: Account<'info, AccountPlaceholder>,
+
+    pub token_mint_a: Account<'info, AccountPlaceholder>,
+    pub token_mint_b: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub token_owner_account_a: Account<'info, AccountPlaceholder>,
+    #[account(mut)]
+    pub token_vault_a: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub token_owner_account_b: Account<'info, AccountPlaceholder>,
+    #[account(mut)]
+    pub token_vault_b: Account<'info, AccountPlaceholder>,
+
+    pub token_program_a: Account<'info, AccountPlaceholder>,
+    pub token_program_b: Account<'info, AccountPlaceholder>,
+    pub memo_program: Account<'info, AccountPlaceholder>,
+    // remaining accounts
+    // - accounts for transfer hook program of token_mint_a
+    // - accounts for transfer hook program of token_mint_b
+}
+
+#[derive(Accounts)]
+pub struct CollectProtocolFeesV2<'info> {
+    pub whirlpools_config: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub whirlpool: Account<'info, AccountPlaceholder>,
+
+    pub collect_protocol_fees_authority: Signer<'info>,
+
+    pub token_mint_a: Account<'info, AccountPlaceholder>,
+    pub token_mint_b: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub token_vault_a: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub token_vault_b: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub token_destination_a: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub token_destination_b: Account<'info, AccountPlaceholder>,
+
+    pub token_program_a: Account<'info, AccountPlaceholder>,
+    pub token_program_b: Account<'info, AccountPlaceholder>,
+    pub memo_program: Account<'info, AccountPlaceholder>,
+    // remaining accounts
+    // - accounts for transfer hook program of token_mint_a
+    // - accounts for transfer hook program of token_mint_b
+}
+
+#[derive(Accounts)]
+#[instruction(reward_index: u8)]
+pub struct CollectRewardV2<'info> {
+    pub whirlpool: Account<'info, AccountPlaceholder>,
+
+    pub position_authority: Signer<'info>,
+
+    #[account(mut)]
+    pub position: Account<'info, AccountPlaceholder>,
+    pub position_token_account: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub reward_owner_account: Account<'info, AccountPlaceholder>,
+
+    pub reward_mint: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub reward_vault: Account<'info, AccountPlaceholder>,
+
+    pub reward_token_program: Account<'info, AccountPlaceholder>,
+    pub memo_program: Account<'info, AccountPlaceholder>,
+    // remaining accounts
+    // - accounts for transfer hook program of reward_mint
+}
+
+#[derive(Accounts)]
+pub struct DeleteTokenBadge<'info> {
+    pub whirlpools_config: Account<'info, AccountPlaceholder>,
+
+    pub whirlpools_config_extension: Account<'info, AccountPlaceholder>,
+
+    pub token_badge_authority: Signer<'info>,
+
+    pub token_mint: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub token_badge: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub receiver: Account<'info, AccountPlaceholder>,
+}
+
+#[derive(Accounts)]
+pub struct ModifyLiquidityV2<'info> {
+    #[account(mut)]
+    pub whirlpool: Account<'info, AccountPlaceholder>,
+
+    pub token_program_a: Account<'info, AccountPlaceholder>,
+    pub token_program_b: Account<'info, AccountPlaceholder>,
+
+    pub memo_program: Account<'info, AccountPlaceholder>,
+
+    pub position_authority: Signer<'info>,
+
+    #[account(mut)]
+    pub position: Account<'info, AccountPlaceholder>,
+    pub position_token_account: Account<'info, AccountPlaceholder>,
+
+    pub token_mint_a: Account<'info, AccountPlaceholder>,
+    pub token_mint_b: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub token_owner_account_a: Account<'info, AccountPlaceholder>,
+    #[account(mut)]
+    pub token_owner_account_b: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub token_vault_a: Account<'info, AccountPlaceholder>,
+    #[account(mut)]
+    pub token_vault_b: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub tick_array_lower: Account<'info, AccountPlaceholder>,
+    #[account(mut)]
+    pub tick_array_upper: Account<'info, AccountPlaceholder>,
+    // remaining accounts
+    // - accounts for transfer hook program of token_mint_a
+    // - accounts for transfer hook program of token_mint_b
+}
+
+#[derive(Accounts)]
+pub struct InitializeConfigExtension<'info> {
+    pub config: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub config_extension: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub funder: Signer<'info>,
+
+    pub fee_authority: Signer<'info>,
+
+    pub system_program: Account<'info, AccountPlaceholder>,
+}
+
+#[derive(Accounts)]
+#[instruction(tick_spacing: u16)]
+pub struct InitializePoolV2<'info> {
+    pub whirlpools_config: Account<'info, AccountPlaceholder>,
+
+    pub token_mint_a: Account<'info, AccountPlaceholder>,
+    pub token_mint_b: Account<'info, AccountPlaceholder>,
+
+    pub token_badge_a: Account<'info, AccountPlaceholder>,
+    pub token_badge_b: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub funder: Signer<'info>,
+
+    #[account(mut)]
+    pub whirlpool: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub token_vault_a: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub token_vault_b: Account<'info, AccountPlaceholder>,
+
+    pub fee_tier: Account<'info, AccountPlaceholder>,
+
+    pub token_program_a: Account<'info, AccountPlaceholder>,
+    pub token_program_b: Account<'info, AccountPlaceholder>,
+    pub system_program: Account<'info, AccountPlaceholder>,
+    pub rent: Account<'info, AccountPlaceholder>,
+}
+
+#[derive(Accounts)]
+#[instruction(reward_index: u8)]
+pub struct InitializeRewardV2<'info> {
+    pub reward_authority: Signer<'info>,
+
+    #[account(mut)]
+    pub funder: Signer<'info>,
+
+    #[account(mut)]
+    pub whirlpool: Account<'info, AccountPlaceholder>,
+
+    pub reward_mint: Account<'info, AccountPlaceholder>,
+
+    pub reward_token_badge: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub reward_vault: Account<'info, AccountPlaceholder>,
+
+    pub reward_token_program: Account<'info, AccountPlaceholder>,
+    pub system_program: Account<'info, AccountPlaceholder>,
+    pub rent: Account<'info, AccountPlaceholder>,
+}
+
+#[derive(Accounts)]
+pub struct InitializeTokenBadge<'info> {
+    pub whirlpools_config: Account<'info, AccountPlaceholder>,
+
+    pub whirlpools_config_extension: Account<'info, AccountPlaceholder>,
+
+    pub token_badge_authority: Signer<'info>,
+
+    pub token_mint: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub token_badge: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub funder: Signer<'info>,
+
+    pub system_program: Account<'info, AccountPlaceholder>,
+}
+
+#[derive(Accounts)]
+pub struct SetConfigExtensionAuthority<'info> {
+    pub whirlpools_config: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub whirlpools_config_extension: Account<'info, AccountPlaceholder>,
+
+    pub config_extension_authority: Signer<'info>,
+
+    pub new_config_extension_authority: Account<'info, AccountPlaceholder>,
+}
+
+#[derive(Accounts)]
+#[instruction(reward_index: u8)]
+pub struct SetRewardEmissionsV2<'info> {
+    #[account(mut)]
+    pub whirlpool: Account<'info, AccountPlaceholder>,
+
+    pub reward_authority: Signer<'info>,
+
+    pub reward_vault: Account<'info, AccountPlaceholder>,
+}
+
+#[derive(Accounts)]
+pub struct SetTokenBadgeAuthority<'info> {
+    pub whirlpools_config: Account<'info, AccountPlaceholder>,
+
+    pub whirlpools_config_extension: Account<'info, AccountPlaceholder>,
+
+    pub config_extension_authority: Signer<'info>,
+
+    pub new_token_badge_authority: Account<'info, AccountPlaceholder>,
+}
+
+#[derive(Accounts)]
+pub struct SwapV2<'info> {
+    pub token_program_a: Account<'info, AccountPlaceholder>,
+    pub token_program_b: Account<'info, AccountPlaceholder>,
+
+    pub memo_program: Account<'info, AccountPlaceholder>,
+
+    pub token_authority: Signer<'info>,
+
+    #[account(mut)]
+    pub whirlpool: Account<'info, AccountPlaceholder>,
+
+    pub token_mint_a: Account<'info, AccountPlaceholder>,
+    pub token_mint_b: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub token_owner_account_a: Account<'info, AccountPlaceholder>,
+    #[account(mut)]
+    pub token_vault_a: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub token_owner_account_b: Account<'info, AccountPlaceholder>,
+    #[account(mut)]
+    pub token_vault_b: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub tick_array_0: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub tick_array_1: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub tick_array_2: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub oracle: Account<'info, AccountPlaceholder>,
+    // remaining accounts
+    // - accounts for transfer hook program of token_mint_a
+    // - accounts for transfer hook program of token_mint_b
+    // - supplemental TickArray accounts
+}
+
+#[derive(Accounts)]
+#[instruction(
+    amount: u64,
+    other_amount_threshold: u64,
+    amount_specified_is_input: bool,
+    a_to_b_one: bool,
+    a_to_b_two: bool,
+)]
+pub struct TwoHopSwapV2<'info> {
+    #[account(mut)]
+    pub whirlpool_one: Account<'info, AccountPlaceholder>,
+    #[account(mut)]
+    pub whirlpool_two: Account<'info, AccountPlaceholder>,
+
+    pub token_mint_input: Account<'info, AccountPlaceholder>,
+    pub token_mint_intermediate: Account<'info, AccountPlaceholder>,
+    pub token_mint_output: Account<'info, AccountPlaceholder>,
+
+    pub token_program_input: Account<'info, AccountPlaceholder>,
+    pub token_program_intermediate: Account<'info, AccountPlaceholder>,
+    pub token_program_output: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub token_owner_account_input: Account<'info, AccountPlaceholder>,
+    #[account(mut))]
+    pub token_vault_one_input: Account<'info, AccountPlaceholder>,
+    #[account(mut))]
+    pub token_vault_one_intermediate: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub token_vault_two_intermediate: Account<'info, AccountPlaceholder>,
+    #[account(mut))]
+    pub token_vault_two_output: Account<'info, AccountPlaceholder>,
+    #[account(mut)]
+    pub token_owner_account_output: Account<'info, AccountPlaceholder>,
+
+    pub token_authority: Signer<'info>,
+
+    #[account(mut)]
+    pub tick_array_one_0: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub tick_array_one_1: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub tick_array_one_2: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub tick_array_two_0: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub tick_array_two_1: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub tick_array_two_2: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub oracle_one: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub oracle_two: Account<'info, AccountPlaceholder>,
+
+    pub memo_program: Account<'info, AccountPlaceholder>,
+    // remaining accounts
+    // - accounts for transfer hook program of token_mint_input
+    // - accounts for transfer hook program of token_mint_intermediate
+    // - accounts for transfer hook program of token_mint_output
+    // - supplemental TickArray accounts for whirlpool_one
+    // - supplemental TickArray accounts for whirlpool_two
+}
