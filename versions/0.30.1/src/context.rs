@@ -960,3 +960,47 @@ pub struct TwoHopSwapV2<'info> {
     // - supplemental TickArray accounts for whirlpool_one
     // - supplemental TickArray accounts for whirlpool_two
 }
+
+#[derive(Accounts)]
+pub struct OpenPositionWithTokenExtensions<'info> {
+    #[account(mut)]
+    pub funder: Signer<'info>,
+
+    pub owner: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub position: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub position_mint: Signer<'info>,
+
+    #[account(mut)]
+    pub position_token_account: Account<'info, AccountPlaceholder>,
+
+    pub whirlpool: Account<'info, AccountPlaceholder>,
+
+    pub token_2022_program: Account<'info, AccountPlaceholder>,
+    pub system_program: Account<'info, AccountPlaceholder>,
+    pub associated_token_program: Account<'info, AccountPlaceholder>,
+
+    pub metadata_update_auth: Account<'info, AccountPlaceholder>,
+}
+
+#[derive(Accounts)]
+pub struct ClosePositionWithTokenExtensions<'info> {
+    pub position_authority: Signer<'info>,
+
+    #[account(mut)]
+    pub receiver: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub position: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub position_mint: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub position_token_account: Account<'info, AccountPlaceholder>,
+
+    pub token_2022_program: Account<'info, AccountPlaceholder>,
+}
