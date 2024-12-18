@@ -12,12 +12,6 @@ use crate::context::*;
 pub mod util;
 
 ////////////////////////////////////////////////////////////////////////////////
-// Constant
-////////////////////////////////////////////////////////////////////////////////
-pub const WPB_NFT_UPDATE_AUTH: Pubkey = pubkey!("3axbTs2z5GBy6usVbNVoqEgZMng3vZvMnAoX29BFfwhr");
-pub const WP_NFT_UPDATE_AUTH: Pubkey = pubkey!("3axbTs2z5GBy6usVbNVoqEgZMng3vZvMnAoX29BFfwhr");
-
-////////////////////////////////////////////////////////////////////////////////
 // Program
 ////////////////////////////////////////////////////////////////////////////////
 #[program]
@@ -161,6 +155,7 @@ pub mod whirlpool {
         ctx: Context<SetRewardEmissionsSuperAuthority>,
     ) -> Result<()> { Ok(()) }
 
+    #[allow(clippy::too_many_arguments)]
     pub fn two_hop_swap(
         ctx: Context<TwoHopSwap>,
         amount: u64,
@@ -194,6 +189,17 @@ pub mod whirlpool {
     pub fn close_bundled_position(
         ctx: Context<CloseBundledPosition>,
         bundle_index: u16,
+    ) -> Result<()> { Ok(()) }
+
+    pub fn open_position_with_token_extensions(
+        ctx: Context<OpenPositionWithTokenExtensions>,
+        tick_lower_index: i32,
+        tick_upper_index: i32,
+        with_token_metadata_extension: bool,
+    ) -> Result<()> { Ok(()) }
+
+    pub fn close_position_with_token_extensions(
+        ctx: Context<ClosePositionWithTokenExtensions>,
     ) -> Result<()> { Ok(()) }
 
     ////////////////////////////////////////////////////////////////////////////////
