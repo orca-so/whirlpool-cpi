@@ -164,7 +164,7 @@ pub struct ModifyLiquidity<'info> {
 #[derive(Accounts)]
 pub struct InitializeConfig<'info> {
     #[account(mut)]
-    pub config: Account<'info, AccountPlaceholder>,
+    pub config: Signer<'info>,
 
     #[account(mut)]
     pub funder: Signer<'info>,
@@ -203,10 +203,10 @@ pub struct InitializePool<'info> {
     pub whirlpool: Account<'info, AccountPlaceholder>,
 
     #[account(mut)]
-    pub token_vault_a: Account<'info, AccountPlaceholder>,
+    pub token_vault_a: Signer<'info>,
 
     #[account(mut)]
-    pub token_vault_b: Account<'info, AccountPlaceholder>,
+    pub token_vault_b: Signer<'info>,
 
     pub fee_tier: Account<'info, AccountPlaceholder>,
 
@@ -221,7 +221,7 @@ pub struct InitializePositionBundle<'info> {
     pub position_bundle: Account<'info, AccountPlaceholder>,
 
     #[account(mut)]
-    pub position_bundle_mint: Account<'info, AccountPlaceholder>,
+    pub position_bundle_mint: Signer<'info>,
 
     #[account(mut)]
     pub position_bundle_token_account: Account<'info, AccountPlaceholder>,
@@ -243,7 +243,7 @@ pub struct InitializePositionBundleWithMetadata<'info> {
     pub position_bundle: Account<'info, AccountPlaceholder>,
 
     #[account(mut)]
-    pub position_bundle_mint: Account<'info, AccountPlaceholder>,
+    pub position_bundle_mint: Signer<'info>,
 
     #[account(mut)]
     pub position_bundle_metadata: Account<'info, AccountPlaceholder>,
@@ -280,7 +280,7 @@ pub struct InitializeReward<'info> {
     pub reward_mint: Account<'info, AccountPlaceholder>,
 
     #[account(mut)]
-    pub reward_vault: Account<'info, AccountPlaceholder>,
+    pub reward_vault: Signer<'info>,
 
     pub token_program: Account<'info, AccountPlaceholder>,
     pub system_program: Account<'info, AccountPlaceholder>,
@@ -333,7 +333,7 @@ pub struct OpenPosition<'info> {
     pub position: Account<'info, AccountPlaceholder>,
 
     #[account(mut)]
-    pub position_mint: Account<'info, AccountPlaceholder>,
+    pub position_mint: Signer<'info>,
 
     #[account(mut)]
     pub position_token_account: Account<'info, AccountPlaceholder>,
@@ -357,7 +357,7 @@ pub struct OpenPositionWithMetadata<'info> {
     pub position: Account<'info, AccountPlaceholder>,
 
     #[account(mut)]
-    pub position_mint: Account<'info, AccountPlaceholder>,
+    pub position_mint: Signer<'info>,
 
     #[account(mut)]
     pub position_metadata_account: Account<'info, AccountPlaceholder>,
@@ -759,10 +759,10 @@ pub struct InitializePoolV2<'info> {
     pub whirlpool: Account<'info, AccountPlaceholder>,
 
     #[account(mut)]
-    pub token_vault_a: Account<'info, AccountPlaceholder>,
+    pub token_vault_a: Signer<'info>,
 
     #[account(mut)]
-    pub token_vault_b: Account<'info, AccountPlaceholder>,
+    pub token_vault_b: Signer<'info>,
 
     pub fee_tier: Account<'info, AccountPlaceholder>,
 
@@ -788,7 +788,7 @@ pub struct InitializeRewardV2<'info> {
     pub reward_token_badge: Account<'info, AccountPlaceholder>,
 
     #[account(mut)]
-    pub reward_vault: Account<'info, AccountPlaceholder>,
+    pub reward_vault: Signer<'info>,
 
     pub reward_token_program: Account<'info, AccountPlaceholder>,
     pub system_program: Account<'info, AccountPlaceholder>,
@@ -959,4 +959,48 @@ pub struct TwoHopSwapV2<'info> {
     // - accounts for transfer hook program of token_mint_output
     // - supplemental TickArray accounts for whirlpool_one
     // - supplemental TickArray accounts for whirlpool_two
+}
+
+#[derive(Accounts)]
+pub struct OpenPositionWithTokenExtensions<'info> {
+    #[account(mut)]
+    pub funder: Signer<'info>,
+
+    pub owner: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub position: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub position_mint: Signer<'info>,
+
+    #[account(mut)]
+    pub position_token_account: Account<'info, AccountPlaceholder>,
+
+    pub whirlpool: Account<'info, AccountPlaceholder>,
+
+    pub token_2022_program: Account<'info, AccountPlaceholder>,
+    pub system_program: Account<'info, AccountPlaceholder>,
+    pub associated_token_program: Account<'info, AccountPlaceholder>,
+
+    pub metadata_update_auth: Account<'info, AccountPlaceholder>,
+}
+
+#[derive(Accounts)]
+pub struct ClosePositionWithTokenExtensions<'info> {
+    pub position_authority: Signer<'info>,
+
+    #[account(mut)]
+    pub receiver: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub position: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub position_mint: Account<'info, AccountPlaceholder>,
+
+    #[account(mut)]
+    pub position_token_account: Account<'info, AccountPlaceholder>,
+
+    pub token_2022_program: Account<'info, AccountPlaceholder>,
 }

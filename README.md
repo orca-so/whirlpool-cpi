@@ -1,5 +1,17 @@
 # ``whirlpool-cpi`` crate
 ## Usage
+
+💡 Whirlpool program uses Anchor 0.29.0 and Solana 1.17.22, so using Anchor 0.29 and Solana 1.17 is best & free from any trouble if possible.
+
+### with Anchor 0.30.1
+Cargo.toml
+```
+[dependencies]
+anchor-lang = "=0.30.1"
+anchor-spl = "=0.30.1"
+whirlpool-cpi = { git = "https://github.com/orca-so/whirlpool-cpi", branch = "anchor/0.30.1" }
+```
+
 ### with Anchor 0.29.0
 Cargo.toml
 ```
